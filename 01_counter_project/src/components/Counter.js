@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { CounterActions } from "../store/store";
 
 const Counter = () => {
-  const count = useSelector((state) => state.Counter);
+  const count = useSelector((state) => state.Counter.Counter);
   const dispatch = useDispatch();
 
   const Increment = () => {
     dispatch(CounterActions.Increment());
   };
   const IncrementBy5 = () => {
-    dispatch(CounterActions.IncrementBy5(15));
+    dispatch(CounterActions.IncrementBy5(5));
   };
 
   const Decrement = () => {
