@@ -12,9 +12,7 @@ const Slice = createSlice({
   },
 });
 
-const store = configureStore({
-  reducer: Slice.reducer,
-});
-
+const SliceReducer = Slice.reducer;
 export const SliceAction = Slice.actions;
-export default store;
+
+export default SliceReducer;

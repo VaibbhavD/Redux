@@ -7,6 +7,7 @@ const Auth = () => {
   const LoginHandler = (e) => {
     e.preventDefault();
     dispatch(AuthActions.Login());
+    console.loh("Hi");
   };
 
   return (
