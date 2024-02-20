@@ -2,6 +2,7 @@ import Card from "../UI/Card";
 import classes from "./ProductItem.module.css";
 import { CartAction } from "../../store Redux/CratItemsSlice";
 import { useDispatch } from "react-redux";
+import { SliceAction } from "../../store Redux/Slice";
 
 const ProductItem = (props) => {
   const { title, Price, Description, id } = props;
