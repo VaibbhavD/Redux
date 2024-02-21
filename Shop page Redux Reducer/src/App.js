@@ -4,59 +4,29 @@ import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import { Fragment, useEffect } from "react";
 import Notification from "./components/UI/Notification";
-import { SliceAction } from "./store Redux/Slice";
+import { SendCartData } from "./store Redux/CartItemActions";
+import { GetData } from "./store Redux/CartItemActions";
 
 let Initial = true;
 
 function App() {
   const showcart = useSelector((state) => state.UI.ShowCart);
-  const Items = useSelector((state) => state.CartItem.items);
+  const Items = useSelector((state) => state.CartItem);
   const ShowNotification = useSelector((state) => state.UI.ShowNotification);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const FetchData = async () => {
-      dispatch(
-        SliceAction.ShowNotification({
-          status: "Pending",
-          title: "Sending",
-          message: "Sending To Cart",
-        })
-      );
+    dispatch(GetData());
+  }, [dispatch]);
 
-      const response = await fetch(
-        "https://expense-tracker-7b7e1-default-rtdb.firebaseio.com/cart.json",
-        {
-          method: "PUT",
-          body: JSON.stringify(Items),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Seding Cart Data Failed !");
-      }
-      dispatch(
-        SliceAction.ShowNotification({
-          status: "Success",
-          title: "Success",
-          message: "Sent Cart Data SuccessFully !",
-        })
-      );
-    };
+  useEffect(() => {
     if (Initial) {
       Initial = false;
       return;
     }
 
-    FetchData().catch((err) => {
-      dispatch(
-        SliceAction.ShowNotification({
-          status: "Error",
-          title: "Error",
-          message: "Sending Data Failed !",
-        })
-      );
-    });
-  }, [Items, dispatch]);
+    dispatch(SendCartData(Items));
+  }, [Items]);
 
   return (
     <Fragment>
